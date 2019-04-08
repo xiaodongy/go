@@ -47,7 +47,7 @@ type OfferHandler func(hProtocol.Offer)
 func (or OfferRequest) StreamOffers(ctx context.Context, client *Client, handler OfferHandler) (err error) {
 	endpoint, err := or.BuildUrl()
 	if err != nil {
-		return errors.Wrap(err, "Unable to build endpoint")
+		return errors.Wrap(err, "Unable to build endpoint for offers request")
 	}
 
 	url := fmt.Sprintf("%s%s", client.getHorizonURL(), endpoint)
@@ -56,7 +56,7 @@ func (or OfferRequest) StreamOffers(ctx context.Context, client *Client, handler
 		var offer hProtocol.Offer
 		err = json.Unmarshal(data, &offer)
 		if err != nil {
-			return errors.Wrap(err, "Error unmarshaling data")
+			return errors.Wrap(err, "Error unmarshaling data for offers request")
 		}
 		handler(offer)
 		return nil
