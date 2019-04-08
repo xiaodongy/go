@@ -46,7 +46,7 @@ func (lr LedgerRequest) Stream(ctx context.Context, client *Client,
 	handler func(interface{})) (err error) {
 	endpoint, err := lr.BuildUrl()
 	if err != nil {
-		return errors.Wrap(err, "Unable to build endpoint for offers request")
+		return errors.Wrap(err, "Unable to build endpoint")
 	}
 
 	url := fmt.Sprintf("%s%s", client.getHorizonURL(), endpoint)
@@ -55,7 +55,7 @@ func (lr LedgerRequest) Stream(ctx context.Context, client *Client,
 		var ledger hProtocol.Ledger
 		err = json.Unmarshal(data, &ledger)
 		if err != nil {
-			return errors.Wrap(err, "Error unmarshaling data for offers request")
+			return errors.Wrap(err, "Error unmarshaling data")
 		}
 		handler(ledger)
 		return nil
