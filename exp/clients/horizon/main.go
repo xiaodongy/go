@@ -133,6 +133,7 @@ type ClientInterface interface {
 	StreamTrades(ctx context.Context, request TradeRequest, handler TradeHandler) error
 	StreamEffects(ctx context.Context, request EffectRequest, handler EffectHandler) error
 	StreamLedgers(ctx context.Context, request LedgerRequest, handler LedgerHandler) error
+	StreamOrderBooks(ctx context.Context, request OrderBookRequest, handler OrderBookHandler) error
 }
 
 // DefaultTestNetClient is a default client to connect to test network
