@@ -13,21 +13,13 @@ import (
 // BuildUrl creates the endpoint to be queried based on the data in the OfferRequest struct.
 func (or OfferRequest) BuildUrl() (endpoint string, err error) {
 	if or.ForAccount == "" {
-		return endpoint, errors.New("`ForAccount` parameter required")
+		return endpoint, errors.New(`"ForAccount" parameter required`)
 	}
-
-	endpoint = fmt.Sprintf(
-		"accounts/%s/offers",
-		or.ForAccount,
-	)
+	endpoint = fmt.Sprintf("accounts/%s/offers", or.ForAccount)
 
 	queryParams := addQueryParams(cursor(or.Cursor), limit(or.Limit), or.Order)
 	if queryParams != "" {
-		endpoint = fmt.Sprintf(
-			"%s?%s",
-			endpoint,
-			queryParams,
-		)
+		endpoint = fmt.Sprintf("%s?%s", endpoint, queryParams)
 	}
 
 	_, err = url.Parse(endpoint)
