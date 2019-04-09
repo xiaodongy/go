@@ -170,5 +170,13 @@ func (m *MockClient) StreamOffers(ctx context.Context,
 	return m.Called(ctx, request, handler).Error(0)
 }
 
+// StreamLedgers is a mocking method
+func (m *MockClient) StreamLedgers(ctx context.Context,
+	request LedgerRequest,
+	handler LedgerHandler,
+) error {
+	return m.Called(ctx, request, handler).Error(0)
+}
+
 // ensure that the MockClient implements ClientInterface
 var _ ClientInterface = &MockClient{}
